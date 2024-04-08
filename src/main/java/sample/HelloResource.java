@@ -12,6 +12,6 @@ public class HelloResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        return null; // テストが通るように実装する
+        return "Hello"; // テストが通るように実装する
     }
 }

@@ -139,7 +139,7 @@
 					<registry>ghcr.io</registry>
 					<images>
 						<image>
-							<name>FumNak/hello-app</name>
+							<name>fumnak/hello-app</name>
 							<build>
 								<tags>
 									<tag>${image.tag}</tag>

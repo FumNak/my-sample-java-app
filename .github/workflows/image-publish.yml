@@ -28,8 +28,7 @@ jobs:
     - name: Setup Google Cloud
       uses: google-github-actions/auth@v2
       with:
-        service_account_key: ${{ secrets.GCLOUD_AUTH }}
-        project_id: careful-form-419411
+        credentials_json: ${{ secrets.GCLOUD_AUTH }}
 
     - name: Setup Google Cloud
       uses: google-github-actions/setup-gcloud@v2

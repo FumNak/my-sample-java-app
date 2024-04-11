@@ -24,3 +24,26 @@ jobs:
       run: mvn -B package docker:build docker:push -Dimage.tag=`date +%Y%m%dT%H%M%S-%3N` --file pom.xml -s $GITHUB_WORKSPACE/settings.xml
       env: # 自分のリポジトリへのアクセスなのでPATではなくGITHUB_TOKENの権限で登録もできる
         GITHUB_TOKEN: ${{ github.token }}
+
+    - name: Setup Google Cloud
+      uses: google-github-actions/setup-gcloud@master
+      with:
+        service_account_key: ${{ secrets.GCLOUD_AUTH }}
+        project_id: careful-form-419411
+
+    - name: Configure docker for artifact registry
+      run: |
+        gcloud auth configure-docker asia-northeast1-docker.pkg.dev
+        
+    - name: set TAG
+      run: |
+        echo "TAG=$(echo $GITHUB_REF | awk -F/ '{print $NF}')" >> $GITHUB_ENV
+
+    - name: Build
+      run: |
+        docker build -t asia-northeast1-docker.pkg.dev/my-project/sample-repository/example:${{ env.TAG }} ./    
+    
+    - name: Push
+      run: |
+        docker push asia-northeast1-docker.pkg.dev/my-project/sample-repository/example:${{ env.TAG }}
+

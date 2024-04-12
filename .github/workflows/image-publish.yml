@@ -54,8 +54,6 @@ jobs:
           gcloud run deploy sample-docker \
             --image asia-northeast1-docker.pkg.dev/careful-form-419411/cloud-run-source-deploy/example:${{ env.TAG }} \
             --port 8080 \
-            --project careful-form-4194111 \
-            --region asia-northeast1 \
             --platform=managed \
             --allow-unauthenticated \
             --quiet \
